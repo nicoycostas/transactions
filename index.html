@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<!-- if accounts table is empty disable income and expense buttons -->
+
+<!-- close on escape for modals -->
+
+
+
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <header>
+        <h1 class="roboto-light">Transactional System</h1>
+    </header>
+
+    <main class="app">
+
+        <h2 class="total roboto-medium  ">Total: $<span class="totalAmount">0</span></h2>
+        <div class="workspace">
+
+            <div class="left-sidebar">
+                <div class="workspace-accounts">
+                    <h2>Accounts</h2>
+                    <button onclick="ModalAccountOpen();" class="openmodal btn">Create Account</button>
+                    <div class="modalAccount">
+
+                        <label for="accountName">Account Name</label> <br><br>
+                        <!-- account name text -->
+                        <input class="accountNameField" type="text" id="accountName"><br><br>
+                        <label for="typeofaccount">Type</label> <br><br>
+                        <!-- select option -->
+                        <select class="typeOptionField" id="typeofaccount">
+                            <option value="Bank Account">Bank Account</option>
+                            <option value="Debit Card">Debit Card</option>
+                            <option value="Credit Card">Credit Card</option>
+                            <option value="Cash">Cash</option>
+                        </select><br><br>
+                        <label for="balance">Balance</label> <br><br>
+                        <!-- balance field -->
+                        <input class="balanceField" type="number" id="balance"><br><br>
+                        <!-- <input onclick="addAccount()" type="submit" value="Add Account"> -->
+                        <div>
+                            <button class="btn" onclick="addAccount();">Add Account</button>
+                            <button class="btn closeModal">Close</button>
+                        </div>
+
+
+                    </div>
+                    <div class="existing-accounts-box">
+                        <h2 class="existingAccountHeading">Existing Accounts</h2>
+                        <div class="existingAccounts">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="transactions">
+                <h2 class="roboto-light">Transactions</h2>
+                <div class="transactions-entries">
+
+                </div>
+                <div class="transactionBtns">
+                    <button onclick="ModalIncomeOpen();" class="addTransactionBtn btn">Add Income</button>
+                    <button onclick="ModalExpenseOpen();" class="addTransactionBtn btn">Add Expense</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modalIncome">
+            <!-- income category -->
+            <div>
+                <label for="categoryofincome">Category</label> <br><br>
+
+                <select class="categoryofincomeField" id="categoryofincome">
+                    <option value="Salary">Salary</option>
+                    <option value="Services">Services</option>
+                    <option value="Investment">Investment</option>
+                </select><br><br>
+            </div>
+
+            <!-- choose account -->
+            <div>
+                <label for="accountchoose">Choose Account</label><br><br>
+
+                <select class="accountChooseField" id="accountChoose">
+
+                    <!-- <option value="Salary">Salary</option>
+                        <option value="Investment">Investment</option>
+                        <option value=" Car">Car</option>
+                        <option value=" Bill">Bill</option>
+                        <option value="Learning">Education</option> -->
+
+                </select><br><br>
+            </div>
+
+            <!-- income amount -->
+            <div>
+                <label for="incomeAmount">Amount</label> <br><br>
+
+                <input class="incomeamountField" type="number" name="transactionamount" id="transactionamount"><br><br>
+            </div>
+
+            <div>
+                <button class="btn" onclick="addIncome();">Add Transaction</button>
+                <button class="btn closeModal">Close</button>
+            </div>
+
+
+        </div>
+
+        <div class="modalExpense">
+            <label for="typeofransaction">Transaction Type</label><br><br>
+            <!-- select option -->
+            <select class="typeofransactionField" id="typeoftransaction" onchange="changefunc();">
+                <option value=" income" selected="selected">Income</option>
+                <option value=" expense">Expense</option>
+            </select><br><br>
+            <label for="categoryoftransaction">Category</label> <br><br>
+
+            <select class="categoryoftransactionField" id="categoryoftransaction">
+                <option value="Salary">Salary</option>\
+                <option value="Investment">Investment</option>
+                <option value=" Car">Car</option>
+                <option value=" Bill">Bill</option>
+                <option value="Learning">Education</option>
+
+            </select><br><br>
+            <!-- select option -->
+            <label for="transactionamount">Amount</label> <br><br>
+            <input class="transactionamount" type="text" name="transactionamount" id="transactionamount"><br><br>
+            <div>
+                <button class="btn" onclick="addTransaction();">Add Transaction</button>
+                <button class="btn closeModal">Close</button>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

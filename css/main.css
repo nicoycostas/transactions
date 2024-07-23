@@ -1,0 +1,259 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+
+}
+
+html {
+    /* background: linear-gradient(rgba(32, 34, 34, 0.655), rgba(56, 63, 60, 0.717)), url(../imgs/body-background.jpg) no-repeat;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%; */
+
+    background-color: rgb(234, 232, 232);
+}
+
+body {
+    /* background-color: rgb(207, 207, 207); */
+    /* background-color: whitesmoke; */
+    border-radius: 20px;
+
+
+    width: 85%;
+    margin: 0 auto;
+    box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75);
+    padding: 20px;
+    margin-top: 50px;
+
+    background: linear-gradient(to top, rgba(32, 34, 34, 0), rgba(66, 79, 74, 0.724)),
+        url(../imgs/background.jpg), url(../imgs/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+
+}
+
+/* font class*/
+.roboto-light {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.roboto-medium {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+header {
+    /* background-color: rgb(41, 39, 39); */
+    margin: 0;
+    padding: 0;
+
+    width: 85%;
+    margin: 0 auto;
+    padding: 20px;
+
+}
+
+header h1 {
+    text-align: center;
+    font-size: 60px;
+    margin: 0;
+    padding: 10px;
+    color: rgb(4, 104, 54);
+    /* text-shadow: 4px 4px 0px rgb(87, 153, 214);
+    text-shadow: 4px 4px 10px rgba(18, 157, 192, 1);
+    
+ */
+    color: white;
+
+}
+
+
+
+
+.total {
+    text-align: right;
+    color: white;
+    /* padding: 80px; */
+    position: relative;
+    top: 50px;
+    right: 80px;
+    color: green;
+    color: white;
+    /* right: 0; */
+}
+
+
+.workspace {
+    display: flex;
+    color: white;
+    border-radius: 20px;
+
+
+}
+
+.left-sidebar {
+    width: 15%;
+    /* background-color: red; */
+    /* border: 1px solid black; */
+    padding: 30px;
+}
+
+.modalAccount {
+    padding: 20px;
+    border: 1px solid black;
+    margin-top: 20px;
+    display: none;
+    background-color: rgba(81, 81, 81, 0.561);
+    border-radius: 20px;
+}
+
+.modal input {
+    width: 70%;
+}
+
+input[type=button] {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+
+/* existing accounts */
+.existingAccountHeading {
+    display: none;
+}
+
+.accountEntry {
+    color: rgb(253, 255, 253);
+}
+
+.transactions {
+
+    width: 60%;
+    /* border: 1px solid black; */
+    padding: 50px;
+    border-radius: 20px;
+    background-color: rgba(58, 58, 58, 0.355);
+
+}
+
+.transactions-entries {
+    height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 20px;
+    width: 80%;
+}
+
+.transactions-entries h2 {
+    text-align: center;
+
+    font-weight: 300;
+
+}
+
+.transaction {
+    /* background-color: rgb(71, 138, 255); */
+    /* color: white; */
+    width: 100%;
+    /* text-align: center; */
+    /* padding: 5px; */
+    /* margin: 10px; */
+    /* background-color: black; */
+    /* color: white; */
+    /* padding: 5px; */
+    border: 1px solid black;
+    border-radius: 20px;
+    margin: 10px 0;
+    background-color: rgba(45, 45, 45, 0.433);
+    box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75);
+
+
+}
+
+.btn {
+    padding: 10px;
+    background-color: rgb(10, 126, 80);
+    color: white;
+}
+
+.addTransactionBtn {
+    margin-top: 20px;
+}
+
+.span {
+    font-weight: bold;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 10px;
+    position: relative;
+    /* right: 10px; */
+}
+
+.category {
+    background-color: rgb(9, 36, 145);
+    color: white;
+
+}
+
+.transaction p {
+    padding: 10px;
+    font-size: 20px;
+    /* color: white; */
+}
+
+
+.amount {
+    font-weight: bold;
+    padding: 10px;
+    border: 1px solid black;
+    margin-left: 5px;
+    border-radius: 10px;
+    background-color: rgb(55, 55, 55);
+    color: white;
+
+}
+
+.income {
+    background-color: green;
+    color: white;
+}
+
+.income-account {
+    background-color: rgb(5, 173, 188);
+}
+
+.expense {
+    background-color: tomato;
+    color: white;
+}
+
+/* modal modalTransaction */
+.modalIncome,
+.modalExpense {
+    position: absolute;
+    top: 40%;
+    background-color: rgb(76, 76, 76);
+    padding: 40px;
+    left: 40%;
+    display: none;
+    color: white;
+    box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75);
+}
+
+input,
+select {
+    padding: 2px;
+    width: 80%;
+}
