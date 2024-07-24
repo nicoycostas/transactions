@@ -7,10 +7,7 @@ body {
 }
 
 html {
-    /* background: linear-gradient(rgba(32, 34, 34, 0.655), rgba(56, 63, 60, 0.717)), url(../imgs/body-background.jpg) no-repeat;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100%; */
+
 
     background-color: rgb(234, 232, 232);
 
@@ -23,24 +20,15 @@ html {
 }
 
 body {
-    /* background-color: rgb(207, 207, 207); */
-    /* background-color: whitesmoke; */
+
     border-radius: 20px;
 
 
     width: 85%;
     margin: 0 auto;
-    /* box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75);
-    -webkit-box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75); */
+
     padding: 20px;
     margin-top: 50px;
-    /* 
-    background: linear-gradient(to top, rgba(32, 34, 34, 0), rgba(66, 79, 74, 0.724)),
-        url(../imgs/background2.jpg);
-    background-repeat: no-repeat;
-    background-size: cover; */
-    /* background-color: rgba(0, 0, 0, 0.375); */
 
 
 }
@@ -62,6 +50,7 @@ body {
     font-family: "Permanent Marker", cursive;
     font-weight: 400;
     font-style: normal;
+
 }
 
 
@@ -78,10 +67,10 @@ header {
 
 .logo {
     width: 200px;
-    height: 80px;
+    height: 85px;
     position: absolute;
-    top: 108px;
-    left: 100px;
+    top: 60px;
+    left: 802px;
 }
 
 header h1 {
@@ -90,14 +79,12 @@ header h1 {
     margin: 0;
     padding: 10px;
     color: rgb(4, 104, 54);
-    /* text-shadow: 4px 4px 0px rgb(87, 153, 214);
-    text-shadow: 4px 4px 10px rgba(18, 157, 192, 1);
-    
- */
+
     color: white;
+    position: relative;
+    top: 50px;
 
 }
-
 
 
 
