@@ -11,12 +11,18 @@ const balanceField = document.querySelector('.balanceField');
 // grab income Modal html
 const modalAccount = document.querySelector('.modalAccount');
 const categoryofincomeField = document.querySelector('.categoryofincomeField');
-const accountChooseField = document.querySelector('.accountChooseField')
+const accountincomeChooseField = document.querySelector('.accountincomeChooseField')
 const incomeamountField = document.querySelector('.incomeamountField');
 
 let total = 0;
 const existingAccounts = document.querySelector('.existingAccounts');
 const existingAccountHeading = document.querySelector('.existingAccountHeading');
+
+
+// grab expense modal html
+const categoryofexpenseField = document.querySelector('.categoryofexpenseField');
+const accountchooseExpenseField = document.querySelector('.accountchooseExpenseField');
+const expenseamountField = document.querySelector('.expenseamountField');
 
 // grab transaction html
 const transactionEntries = document.querySelector('.transactions-entries');
@@ -24,6 +30,7 @@ const transactionEntries = document.querySelector('.transactions-entries');
 // Arrays creation
 let accountArray = [];
 let incomeArray = [];
+let expenseArray = [];
 let totalAccountsBalance = [];
 
 // grab modal close buttons
@@ -32,7 +39,7 @@ const closeModalBtns = document.querySelectorAll('.closeModal');
 // grab transaction btns
 const addTransactionBtns = document.querySelectorAll('.addTransactionBtn');
 for (let i in addTransactionBtns) {
-    // addTransactionBtns[i].style.disabled = true;
+
     addTransactionBtns[i].disabled = true;
 }
 
@@ -57,34 +64,38 @@ class IncomeTransaction {
         this.amount = amount;
     }
 }
+
+class ExpenseTransaction {
+    constructor(category, account, amount) {
+        this.category = category;
+        this.account = account;
+        this.amount = amount;
+    }
+}
 //-----------End Declaration of Objects--------------------//
 
 
 //-----------Start Open Modals--------------------//
 function ModalAccountOpen() {
     modalAccount.style.display = "block";
-    closeModal(modalAccount);
 
+    closeModal(modalAccount);
 }
+
+
+
 // Open modal income
 function ModalIncomeOpen() {
     modalIncome.style.display = "block";
 
-    for (let i in accountArray) {
-        let accountOption = `
-            <option value='${accountArray[i].name}'>${accountArray[i].name}</option> `;
-        console.log(accountOption);
-        accountChooseField.insertAdjacentHTML("afterbegin", accountOption);
-
-
-    };
-
+    dynAccounts(accountincomeChooseField);
     closeModal(modalIncome);
 }
 
 // Open modal expense
 function ModalExpenseOpen() {
     modalExpense.style.display = "block";
+    dynAccounts(accountchooseExpenseField);
     closeModal(modalExpense);
 }
 //-----------End Open Modals--------------------//
@@ -122,12 +133,15 @@ function addAccount() {
         // addTransactionBtns[i].style.disabled = true;
         addTransactionBtns[i].disabled = false;
     }
+
+
+
 }
 
 // Add Income Function
 function addIncome() {
 
-    let newIncomeEntry = new IncomeTransaction(categoryofincomeField.value, accountChooseField.value, incomeamountField.value);
+    let newIncomeEntry = new IncomeTransaction(categoryofincomeField.value, accountincomeChooseField.value, incomeamountField.value);
 
     incomeArray.push(newIncomeEntry);
 
@@ -143,6 +157,25 @@ function addIncome() {
     transactionEntries.insertAdjacentHTML("afterbegin", htmlIncomeEntry);
     modalIncome.style.display = "none";
 
+    // emptying input values 
+
+}
+
+// Add Expense function
+function addExpense() {
+    let newExpenseEntry = new ExpenseTransaction(categoryofexpenseField.value, accountchooseExpenseField.value, expenseamountField.value);
+    expenseArray.push(newExpenseEntry);
+
+    const htmlExpenseEntry = `
+            <div class="transaction" >
+                <p><span class="type span expense">Expense</span> <span class="category span">Category:
+                    ${newExpenseEntry.category}</span> <span class="span income-account">${newExpenseEntry.account}</span> <span class="span amount">Amount: ${newExpenseEntry.amount}</span>
+                </p>
+            </div>
+
+            `;
+    transactionEntries.insertAdjacentHTML("afterbegin", htmlExpenseEntry);
+    modalExpense.style.display = "none";
 
 }
 
@@ -167,13 +200,48 @@ function calculateTotalofAccounts(arrayofAccounts) {
 //-----------------DRY------------------//
 // close modals function
 function closeModal(modal) {
+
     for (let i in closeModalBtns) {
-        console.log(closeModalBtns[i]);
+
         closeModalBtns[i].addEventListener("click", function () {
             modal.style.display = "none";
         });
 
     }
+
 }
 
+// dynamic selection of account options for income and expenses
+function dynAccounts(importdynAccount) {
+
+
+    if (importdynAccount.options.length > 0) {
+
+        for (let i in importdynAccount.options) {
+
+            importdynAccount.remove(i);
+        }
+
+        for (let i in accountArray) {
+            let accountOption = `
+            <option value='${accountArray[i].name}'>${accountArray[i].name}</option> `;
+
+            // console.log(accountOption.search(`${accountArray[i].name}`));
+            importdynAccount.insertAdjacentHTML("afterbegin", accountOption);
+
+        }
+    }
+    else if (importdynAccount.options.length == 0) {
+
+        for (let i in accountArray) {
+            let accountOption = `
+            <option value='${accountArray[i].name}'>${accountArray[i].name}</option> `;
+
+            // console.log(accountOption.search(`${accountArray[i].name}`));
+            importdynAccount.insertAdjacentHTML("afterbegin", accountOption);
+
+        }
+    }
+
+}
 //-----------------DRY------------------//

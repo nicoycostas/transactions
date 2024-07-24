@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<!-- if accounts table is empty disable income and expense buttons -->
+
 
 <!-- close on escape for modals -->
 
@@ -100,7 +100,7 @@
             <div>
                 <label for="accountchoose">Choose Account</label><br><br>
 
-                <select class="accountChooseField" id="accountChoose">
+                <select class="accountincomeChooseField" id="accountChoose">
 
                     <!-- <option value="Salary">Salary</option>
                         <option value="Investment">Investment</option>
@@ -127,27 +127,39 @@
         </div>
 
         <div class="modalExpense">
-            <label for="typeofransaction">Transaction Type</label><br><br>
-            <!-- select option -->
-            <select class="typeofransactionField" id="typeoftransaction" onchange="changefunc();">
-                <option value=" income" selected="selected">Income</option>
-                <option value=" expense">Expense</option>
-            </select><br><br>
-            <label for="categoryoftransaction">Category</label> <br><br>
-
-            <select class="categoryoftransactionField" id="categoryoftransaction">
-                <option value="Salary">Salary</option>\
-                <option value="Investment">Investment</option>
-                <option value=" Car">Car</option>
-                <option value=" Bill">Bill</option>
-                <option value="Learning">Education</option>
-
-            </select><br><br>
-            <!-- select option -->
-            <label for="transactionamount">Amount</label> <br><br>
-            <input class="transactionamount" type="text" name="transactionamount" id="transactionamount"><br><br>
+            <!-- expense category -->
             <div>
-                <button class="btn" onclick="addTransaction();">Add Transaction</button>
+                <label for="categoryofexpense">Category</label> <br><br>
+
+                <select class="categoryofexpenseField" id="categoryofexpense">
+                    <option value="Car">Car</option>
+                    <option value="Education">Education</option>
+                    <option value="Convenient Store">Convenient Store</option>
+                    <option value="Shopping">Shopping</option>
+                </select><br><br>
+            </div>
+
+            <!-- choose account -->
+            <div>
+                <label for="accountchooseExpense">Choose Account</label><br><br>
+
+                <select class="accountchooseExpenseField" id="accountchooseExpense">
+
+
+
+                </select><br><br>
+            </div>
+
+            <!-- expense amount -->
+            <div>
+                <label for="expenseAmount">Amount</label> <br><br>
+
+                <input class="expenseamountField" type="number" name="expenseAmount" id="expenseAmount"><br><br>
+            </div>
+
+            <!-- btns -->
+            <div>
+                <button class="btn" onclick="addExpense();">Add Transaction</button>
                 <button class="btn closeModal">Close</button>
             </div>
 
