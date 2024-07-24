@@ -13,6 +13,13 @@ html {
     height: 100%; */
 
     background-color: rgb(234, 232, 232);
+
+    background: linear-gradient(to top, rgba(54, 96, 96, 0.483), rgb(66, 79, 74)),
+        url(../imgs/background2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+
 }
 
 body {
@@ -23,16 +30,17 @@ body {
 
     width: 85%;
     margin: 0 auto;
-    box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75);
+    /* box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75);
     -webkit-box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75); */
     padding: 20px;
     margin-top: 50px;
-
+    /* 
     background: linear-gradient(to top, rgba(32, 34, 34, 0), rgba(66, 79, 74, 0.724)),
-        url(../imgs/background.jpg), url(../imgs/background.jpg);
+        url(../imgs/background2.jpg);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover; */
+    /* background-color: rgba(0, 0, 0, 0.375); */
 
 
 }
@@ -50,6 +58,13 @@ body {
     font-style: normal;
 }
 
+.permanent-marker-regular {
+    font-family: "Permanent Marker", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
 header {
     /* background-color: rgb(41, 39, 39); */
     margin: 0;
@@ -59,6 +74,14 @@ header {
     margin: 0 auto;
     padding: 20px;
 
+}
+
+.logo {
+    width: 200px;
+    height: 80px;
+    position: absolute;
+    top: 108px;
+    left: 100px;
 }
 
 header h1 {
@@ -83,13 +106,11 @@ header h1 {
     color: white;
     /* padding: 80px; */
     position: relative;
-    top: 50px;
-    right: 80px;
+    top: 95px;
+    right: 98px;
     color: green;
     color: white;
-    /* right: 0; */
 }
-
 
 .workspace {
     display: flex;
@@ -108,11 +129,13 @@ header h1 {
 
 .modalAccount {
     padding: 20px;
-    border: 1px solid black;
+    border: 1px solid rgba(35, 244, 136, 0.165);
     margin-top: 20px;
     display: none;
     background-color: rgba(81, 81, 81, 0.561);
     border-radius: 20px;
+    background-color: rgba(70, 84, 75, 0.485);
+
 }
 
 .modal input {
@@ -140,7 +163,8 @@ input[type=button] {
     /* border: 1px solid black; */
     padding: 50px;
     border-radius: 20px;
-    background-color: rgba(58, 58, 58, 0.355);
+    background-color: rgba(70, 84, 75, 0.485);
+    border: 1px solid rgba(35, 244, 136, 0.165);
 
 }
 
@@ -177,13 +201,14 @@ input[type=button] {
     -webkit-box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75);
 
-
+    background-color: rgba(70, 84, 75, 0.587);
 }
 
 .btn {
     padding: 10px;
     background-color: rgb(10, 126, 80);
     color: white;
+    border-radius: 8.5px;
 }
 
 .addTransactionBtn {
@@ -200,7 +225,8 @@ input[type=button] {
 }
 
 .category {
-    background-color: rgb(9, 36, 145);
+    /* background-color: rgb(9, 36, 145); */
+    background-color: rgb(1, 17, 79);
     color: white;
 
 }
@@ -220,16 +246,20 @@ input[type=button] {
     border-radius: 10px;
     background-color: rgb(55, 55, 55);
     color: white;
+    background-color: white;
+    background-color: rgb(55, 137, 188);
+
 
 }
 
 .income {
-    background-color: green;
+    background-color: rgb(10, 126, 80);
     color: white;
 }
 
-.income-account {
-    background-color: rgb(5, 173, 188);
+.account {
+    /* background-color: rgb(1, 17, 79); */
+    background-color: rgb(9, 36, 145);
 }
 
 .expense {
@@ -242,7 +272,7 @@ input[type=button] {
 .modalExpense {
     position: absolute;
     top: 40%;
-    background-color: rgb(76, 76, 76);
+    background-color: rgba(66, 81, 71, 0.728);
     padding: 40px;
     left: 40%;
     display: none;
@@ -250,6 +280,8 @@ input[type=button] {
     box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75);
     -webkit-box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75);
+    border-radius: 8.5px;
+    border: 1px solid rgba(35, 244, 136, 0.165);
 }
 
 input,

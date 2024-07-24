@@ -120,7 +120,7 @@ function addAccount() {
 
 
     const htmlAccountEntry = `
-            <p class="accountEntry" > <span class="existingAccountName"> ${newAccount.name} /</span> Amount: $${newAccount.balance}
+            <p class="accountEntry" > <span class="existingAccountName"> ${newAccount.name} /</span> Amount: €${newAccount.balance}
     </p > `;
     existingAccountHeading.style.display = "block";
     existingAccounts.insertAdjacentHTML("afterbegin", htmlAccountEntry);
@@ -148,7 +148,7 @@ function addIncome() {
     const htmlIncomeEntry = `
             <div class="transaction" >
                 <p><span class="type span income">Income</span> <span class="category span">Category:
-                    ${newIncomeEntry.category}</span> <span class="span income-account">${newIncomeEntry.account}</span> <span class="span amount">Amount: ${newIncomeEntry.amount}</span>
+                    ${newIncomeEntry.category}</span> <span class="span account">${newIncomeEntry.account}</span> <span class="span amount">Amount: €+${newIncomeEntry.amount}</span>
                 </p>
             </div>
 
@@ -158,6 +158,8 @@ function addIncome() {
     modalIncome.style.display = "none";
 
     // emptying input values 
+    categoryofincomeField.value = "";
+    incomeamountField.value = "";
 
 }
 
@@ -169,7 +171,7 @@ function addExpense() {
     const htmlExpenseEntry = `
             <div class="transaction" >
                 <p><span class="type span expense">Expense</span> <span class="category span">Category:
-                    ${newExpenseEntry.category}</span> <span class="span income-account">${newExpenseEntry.account}</span> <span class="span amount">Amount: ${newExpenseEntry.amount}</span>
+                    ${newExpenseEntry.category}</span> <span class="span account">${newExpenseEntry.account}</span> <span class="span amount">Amount: €-${newExpenseEntry.amount}</span>
                 </p>
             </div>
 
