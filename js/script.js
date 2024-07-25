@@ -49,7 +49,8 @@ const totalAmount = document.querySelector('.totalAmount');
 
 //-----------Declaration of Objects--------------------//
 class Account {
-    constructor(name, type, balance) {
+    constructor(random, name, type, balance) {
+        this.random = random;
         this.name = name;
         this.type = type;
         this.balance = balance;
@@ -105,8 +106,8 @@ function ModalExpenseOpen() {
 //----------DATA ENTRY AND CALCULATION-------------//
 // Add account function 
 function addAccount() {
-
-    let newAccount = new Account(accountNameField.value, typeOptionField.value, balanceField.value);
+    let randomnum = Math.floor(Math.random() * 10);
+    let newAccount = new Account(randomnum, accountNameField.value, typeOptionField.value, Number(balanceField.value));
     accountArray.push(newAccount);
     modalAccount.style.display = "none";
 
@@ -120,14 +121,16 @@ function addAccount() {
 
 
     const htmlAccountEntry = `
-            <p class="accountEntry" > <span class="existingAccountName"> ${newAccount.name} /</span> Amount: €${newAccount.balance}
-    </p > `;
+            <p class="accountEntry"> 
+                <span class="existingAccountName"> ${newAccount.name} /</span> 
+                Amount: <span class="euro">€</span><span id="${newAccount.random}"class="accountAmount">${newAccount.balance}</span>
+            </p > `;
     existingAccountHeading.style.display = "block";
     existingAccounts.insertAdjacentHTML("afterbegin", htmlAccountEntry);
 
-    totalAccountsBalance.push(Number(newAccount.balance));
+    // totalAccountsBalance.push(Number(newAccount.balance));
 
-    total = calculateTotalofAccounts(totalAccountsBalance);
+    total = calculateTotalofAccounts(accountArray);
     totalAmount.innerHTML = total;
     for (let i in addTransactionBtns) {
         // addTransactionBtns[i].style.disabled = true;
@@ -141,25 +144,34 @@ function addAccount() {
 // Add Income Function
 function addIncome() {
 
-    let newIncomeEntry = new IncomeTransaction(categoryofincomeField.value, accountincomeChooseField.value, incomeamountField.value);
+    let newIncomeEntry = new IncomeTransaction(categoryofincomeField.value, accountincomeChooseField.value, Number(incomeamountField.value));
 
     incomeArray.push(newIncomeEntry);
 
     const htmlIncomeEntry = `
             <div class="transaction" >
-                <p><span class="type span income">Income</span> <span class="category span">Category:
-                    ${newIncomeEntry.category}</span> <span class="span account">${newIncomeEntry.account}</span> <span class="span amount">Amount: €+${newIncomeEntry.amount}</span>
+                <p>
+                    <span class="type span income">Income</span> 
+                    <span class="category span">Category:${newIncomeEntry.category}</span>
+                   
+                    <span class="span account">${newIncomeEntry.account}</span>  
+                    <span class="span amount">Amount: <span class="euro">€+<span><span class="incomeamountValue">${newIncomeEntry.amount}</span>
+                    </span>
                 </p>
             </div>
 
             `;
 
     transactionEntries.insertAdjacentHTML("afterbegin", htmlIncomeEntry);
+    addition(accountincomeChooseField.value, Number(incomeamountField.value));
     modalIncome.style.display = "none";
 
     // emptying input values 
-    categoryofincomeField.value = "";
     incomeamountField.value = "";
+
+    calculateTotalofAccounts(accountArray);
+    total = calculateTotalofAccounts(accountArray);
+    totalAmount.innerHTML = total;
 
 }
 
@@ -171,25 +183,34 @@ function addExpense() {
     const htmlExpenseEntry = `
             <div class="transaction" >
                 <p><span class="type span expense">Expense</span> <span class="category span">Category:
-                    ${newExpenseEntry.category}</span> <span class="span account">${newExpenseEntry.account}</span> <span class="span amount">Amount: €-${newExpenseEntry.amount}</span>
+                    ${newExpenseEntry.category}</span> <span class="span account">${newExpenseEntry.account}</span> 
+                    <span class="span amount">Amount:<span class="euro">€-</span><span class="expenseamountValue">${newExpenseEntry.amount}</span>
                 </p>
             </div>
 
             `;
     transactionEntries.insertAdjacentHTML("afterbegin", htmlExpenseEntry);
+
+    subtruction(accountchooseExpenseField.value, Number(expenseamountField.value));
     modalExpense.style.display = "none";
+    calculateTotalofAccounts(accountArray);
+    total = calculateTotalofAccounts(accountArray);
+    totalAmount.innerHTML = total;
+
 
 }
+
+
 
 function calculateTotalofAccounts(arrayofAccounts) {
     let totalAccount = 0;
     arrayofAccounts.forEach(item => {
-        totalAccount += item;
+        totalAccount += item.balance;
 
     });
     return totalAccount;
 }
-
+// subtrack from value of 
 
 //----------DATA ENTRY AND CALCULATION-------------//
 
@@ -247,3 +268,49 @@ function dynAccounts(importdynAccount) {
 
 }
 //-----------------DRY------------------//
+
+
+// addition and subtruction of accounts
+function addition(account, amount) {
+
+    for (let i in accountArray) {
+        if (accountArray[i].name == account) {
+            // console.log(accountArray[i].name, account)
+            accountArray[i].balance += amount;
+            let accountAmount = document.querySelectorAll('.accountAmount');
+            accountAmount.forEach(el => {
+                if (el.getAttribute('id') == accountArray[i].random) {
+
+
+                    el.innerHTML = accountArray[i].balance;
+                }
+
+            });
+
+        }
+
+
+    }
+
+}
+
+function subtruction(account, amount) {
+    for (let i in accountArray) {
+        if (accountArray[i].name == account) {
+            // console.log(accountArray[i].name, account)
+            accountArray[i].balance -= amount;
+            let accountAmount = document.querySelectorAll('.accountAmount');
+            accountAmount.forEach(el => {
+                if (el.getAttribute('id') == accountArray[i].random) {
+
+
+                    el.innerHTML = accountArray[i].balance;
+                }
+
+            });
+
+        }
+
+
+    }
+}
