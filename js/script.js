@@ -46,6 +46,9 @@ for (let i in addTransactionBtns) {
 const totalAmount = document.querySelector('.totalAmount');
 
 
+// copyright year
+const dynYear = document.querySelector('.dynYear');
+
 
 //-----------Declaration of Objects--------------------//
 class Account {
@@ -177,7 +180,7 @@ function addIncome() {
 
 // Add Expense function
 function addExpense() {
-    let newExpenseEntry = new ExpenseTransaction(categoryofexpenseField.value, accountchooseExpenseField.value, expenseamountField.value);
+    let newExpenseEntry = new ExpenseTransaction(categoryofexpenseField.value, accountchooseExpenseField.value, Number(expenseamountField.value));
     expenseArray.push(newExpenseEntry);
 
 
@@ -236,29 +239,46 @@ function subtruction(obj) {
         if (accountArray[i].name == obj.account) {
 
             if (accountArray[i].balance !== 0) {
-                accountArray[i].balance -= obj.amount;
-                let accountAmount = document.querySelectorAll('.accountAmount');
-                accountAmount.forEach(el => {
-                    if (el.getAttribute('id') == accountArray[i].random) {
+
+                if (obj.amount > accountArray[i].balance) {
+
+                    const htmlExpenseEntry = `
+                    <div class="invalid-transaction">
+                        <p>Transaction Invalid. Not enough money in ${obj.account} account.</p>
+                    </div>
+                    
+                    `;
+                    transactionEntries.insertAdjacentHTML("afterbegin", htmlExpenseEntry);
+                } else {
+
+                    accountArray[i].balance -= obj.amount;
+                    let accountAmount = document.querySelectorAll('.accountAmount');
+                    accountAmount.forEach(el => {
+                        if (el.getAttribute('id') == accountArray[i].random) {
 
 
-                        el.innerHTML = accountArray[i].balance;
+                            el.innerHTML = accountArray[i].balance;
 
-                    }
+                        }
 
 
-                });
+                    });
+                    const htmlExpenseEntry = `
+                    <div class="transaction">
+                        <p><span class="type span expense">Expense</span> <span class="category span">Category:
+                            ${obj.category}</span> <span class="span account">${obj.account}</span> 
+                            <span class="span amount">Amount:<span class="euro">€-</span><span class="expenseamountValue">${obj.amount}</span>
+                        </p>
+                    </div>
+                
+                    `;
+                    transactionEntries.insertAdjacentHTML("afterbegin", htmlExpenseEntry);
+                }
 
-                const htmlExpenseEntry = `
-                <div class="transaction">
-                    <p><span class="type span expense">Expense</span> <span class="category span">Category:
-                        ${obj.category}</span> <span class="span account">${obj.account}</span> 
-                        <span class="span amount">Amount:<span class="euro">€-</span><span class="expenseamountValue">${obj.amount}</span>
-                    </p>
-                </div>
-            
-                `;
-                transactionEntries.insertAdjacentHTML("afterbegin", htmlExpenseEntry);
+
+
+
+
 
             } else {
                 const htmlExpenseEntry = `
@@ -333,3 +353,4 @@ function dynAccounts(importdynAccount) {
 //-----------------DRY------------------//
 
 
+dynYear.innerHTML = (new Date().getFullYear());

@@ -9,28 +9,30 @@ body {
 html {
 
 
-    background-color: rgb(234, 232, 232);
+    /* background-color: rgb(234, 232, 232); */
 
-    background: linear-gradient(to top, rgba(54, 96, 96, 0.483), rgb(66, 79, 74)),
-        url(../imgs/background2.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 1000px;
+
 
 }
 
 body {
+    background: linear-gradient(to top, rgba(54, 96, 96, 0.483), rgb(66, 79, 74)),
+        url(../imgs/background2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+
+.app {
 
     border-radius: 20px;
 
 
-    width: 85%;
+    width: 90%;
     margin: 0 auto;
 
     padding: 20px;
     margin-top: 50px;
-
-
 }
 
 /* font class*/
@@ -91,10 +93,9 @@ header h1 {
 .total {
     text-align: right;
     color: white;
-    /* padding: 80px; */
     position: relative;
     top: 90px;
-    right: 290px;
+    right: 389px;
     color: green;
     color: white;
 }
@@ -308,4 +309,22 @@ select {
 .euro {
 
     font-weight: bold;
+}
+
+footer {
+    background-color: rgba(42, 55, 51, 0);
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 20px;
+}
+
+.social-icons a {
+    text-decoration: none !important;
+}
+
+.social-icons a i {
+    color: white;
+    font-size: 30px;
+    margin: 10px;
 }

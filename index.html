@@ -18,21 +18,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
 
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/d495971c43.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <header>
-        <img class="logo" src="./imgs/logo.png" alt="">
-        <h1 class="permanent-marker-regular">Transactional System</h1>
-    </header>
+
 
     <main class="app">
-
-        <h2 class="total roboto-light  ">Total: <span class="euro">€</span><span class="totalAmount">0</span></h2>
+        <header>
+            <img class="logo" src="./imgs/logo.png" alt="">
+            <h1 class="permanent-marker-regular">Transactional System</h1>
+        </header>
+        <h2 class="total roboto-light">Total: <span class="euro">€</span><span class="totalAmount">0</span></h2>
         <div class="workspace">
 
-            <div class="left-sidebar class=" euro"">
-                <div class="workspace-accounts">
+            <div class="left-sidebar">
+                <div class=" workspace-accounts">
                     <h2 class="roboto-light">Accounts</h2>
                     <button onclick="ModalAccountOpen();" class="openmodal btn">Create Account</button>
                     <div class="modalAccount">
@@ -156,11 +158,21 @@
             </div>
 
         </div>
+
     </main>
-
     <footer>
+        <p class="permanent-marker-regular ">&copy; Copyright <span class="dynYear"></span> - Created By Costas Nicou
+        </p>
+        <div class="social-icons">
+            <a href=""><i class="fa-brands fa-square-facebook"></i></a>
+            <a href=""><i class="fa-brands fa-square-instagram"></i></a>
+            <a href=""><i class="fa-brands fa-linkedin"></i></a>
+            <a href=""><i class="fa-brands fa-square-github"></i></a>
 
+        </div>
     </footer>
+
+
     <script src="js/script.js"></script>
 </body>
 
