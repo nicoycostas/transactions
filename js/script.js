@@ -180,18 +180,14 @@ function addExpense() {
     let newExpenseEntry = new ExpenseTransaction(categoryofexpenseField.value, accountchooseExpenseField.value, expenseamountField.value);
     expenseArray.push(newExpenseEntry);
 
-    const htmlExpenseEntry = `
-            <div class="transaction" >
-                <p><span class="type span expense">Expense</span> <span class="category span">Category:
-                    ${newExpenseEntry.category}</span> <span class="span account">${newExpenseEntry.account}</span> 
-                    <span class="span amount">Amount:<span class="euro">€-</span><span class="expenseamountValue">${newExpenseEntry.amount}</span>
-                </p>
-            </div>
 
-            `;
-    transactionEntries.insertAdjacentHTML("afterbegin", htmlExpenseEntry);
 
-    subtruction(accountchooseExpenseField.value, Number(expenseamountField.value));
+
+    // subtruction(accountchooseExpenseField.value, Number(expenseamountField.value));
+
+    subtruction(newExpenseEntry);
+
+
     modalExpense.style.display = "none";
     calculateTotalofAccounts(accountArray);
     total = calculateTotalofAccounts(accountArray);
@@ -199,7 +195,6 @@ function addExpense() {
 
 
 }
-
 
 
 function calculateTotalofAccounts(arrayofAccounts) {
@@ -210,14 +205,82 @@ function calculateTotalofAccounts(arrayofAccounts) {
     });
     return totalAccount;
 }
-// subtrack from value of 
+
+// addition and subtruction of accounts
+function addition(account, amount) {
+
+    for (let i in accountArray) {
+        if (accountArray[i].name == account) {
+
+            accountArray[i].balance += amount;
+            let accountAmount = document.querySelectorAll('.accountAmount');
+            accountAmount.forEach(el => {
+                if (el.getAttribute('id') == accountArray[i].random) {
+
+
+                    el.innerHTML = accountArray[i].balance;
+                }
+
+            });
+
+        }
+
+
+    }
+
+}
+
+function subtruction(obj) {
+
+    for (let i in accountArray) {
+        if (accountArray[i].name == obj.account) {
+
+            if (accountArray[i].balance !== 0) {
+                accountArray[i].balance -= obj.amount;
+                let accountAmount = document.querySelectorAll('.accountAmount');
+                accountAmount.forEach(el => {
+                    if (el.getAttribute('id') == accountArray[i].random) {
+
+
+                        el.innerHTML = accountArray[i].balance;
+
+                    }
+
+
+                });
+
+                const htmlExpenseEntry = `
+                <div class="transaction">
+                    <p><span class="type span expense">Expense</span> <span class="category span">Category:
+                        ${obj.category}</span> <span class="span account">${obj.account}</span> 
+                        <span class="span amount">Amount:<span class="euro">€-</span><span class="expenseamountValue">${obj.amount}</span>
+                    </p>
+                </div>
+            
+                `;
+                transactionEntries.insertAdjacentHTML("afterbegin", htmlExpenseEntry);
+
+            } else {
+                const htmlExpenseEntry = `
+                <div class="invalid-transaction">
+                    <p>Transaction Invalid. ${obj.account} account is empty.</p>
+                </div>
+                
+                `;
+                transactionEntries.insertAdjacentHTML("afterbegin", htmlExpenseEntry);
+
+            }
+        }
+
+
+    }
+}
+
+// function minusZero(){
+
+// }
 
 //----------DATA ENTRY AND CALCULATION-------------//
-
-
-
-
-
 
 
 //-----------------DRY------------------//
@@ -270,47 +333,3 @@ function dynAccounts(importdynAccount) {
 //-----------------DRY------------------//
 
 
-// addition and subtruction of accounts
-function addition(account, amount) {
-
-    for (let i in accountArray) {
-        if (accountArray[i].name == account) {
-            // console.log(accountArray[i].name, account)
-            accountArray[i].balance += amount;
-            let accountAmount = document.querySelectorAll('.accountAmount');
-            accountAmount.forEach(el => {
-                if (el.getAttribute('id') == accountArray[i].random) {
-
-
-                    el.innerHTML = accountArray[i].balance;
-                }
-
-            });
-
-        }
-
-
-    }
-
-}
-
-function subtruction(account, amount) {
-    for (let i in accountArray) {
-        if (accountArray[i].name == account) {
-            // console.log(accountArray[i].name, account)
-            accountArray[i].balance -= amount;
-            let accountAmount = document.querySelectorAll('.accountAmount');
-            accountAmount.forEach(el => {
-                if (el.getAttribute('id') == accountArray[i].random) {
-
-
-                    el.innerHTML = accountArray[i].balance;
-                }
-
-            });
-
-        }
-
-
-    }
-}
