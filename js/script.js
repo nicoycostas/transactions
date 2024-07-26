@@ -1,3 +1,7 @@
+// --------TODO's--------------------//
+// Addition pass object
+
+// --------TODO's--------------------//
 
 // grab modals divs html
 const modalIncome = document.querySelector('.modalIncome');
@@ -121,12 +125,13 @@ function addAccount() {
     balanceField.value = "";
 
 
+    let printedamountBalance = newAccount.balance.toFixed(2);
 
 
     const htmlAccountEntry = `
             <p class="accountEntry"> 
                 <span class="existingAccountName"> ${newAccount.name} /</span> 
-                Amount: <span class="euro">€</span><span id="${newAccount.random}"class="accountAmount">${newAccount.balance}</span>
+                Amount: <span class="euro">€</span><span id="${newAccount.random}"class="accountAmount">${printedamountBalance}</span>
             </p > `;
     existingAccountHeading.style.display = "block";
     existingAccounts.insertAdjacentHTML("afterbegin", htmlAccountEntry);
@@ -158,7 +163,7 @@ function addIncome() {
                     <span class="category span">Category:${newIncomeEntry.category}</span>
                    
                     <span class="span account">${newIncomeEntry.account}</span>  
-                    <span class="span amount">Amount: <span class="euro">€+<span><span class="incomeamountValue">${newIncomeEntry.amount}</span>
+                    <span class="span amount">Amount: <span class="euro">€+<span><span class="incomeamountValue">${newIncomeEntry.amount.toFixed(2)}</span>
                     </span>
                 </p>
             </div>
@@ -166,7 +171,7 @@ function addIncome() {
             `;
 
     transactionEntries.insertAdjacentHTML("afterbegin", htmlIncomeEntry);
-    addition(accountincomeChooseField.value, Number(incomeamountField.value));
+    addition(newIncomeEntry);
     modalIncome.style.display = "none";
 
     // emptying input values 
@@ -180,7 +185,7 @@ function addIncome() {
 
 // Add Expense function
 function addExpense() {
-    let newExpenseEntry = new ExpenseTransaction(categoryofexpenseField.value, accountchooseExpenseField.value, Number(expenseamountField.value));
+    let newExpenseEntry = new ExpenseTransaction(categoryofexpenseField.value, accountchooseExpenseField.value, Number(expenseamountField.value).toFixed(2));
     expenseArray.push(newExpenseEntry);
 
 
@@ -202,35 +207,36 @@ function addExpense() {
 
 function calculateTotalofAccounts(arrayofAccounts) {
     let totalAccount = 0;
+    let printedTotal = 0;
     arrayofAccounts.forEach(item => {
         totalAccount += item.balance;
+        // console.log(item)
+        printedTotal = totalAccount;
 
     });
-    return totalAccount;
+    return printedTotal.toFixed(2);
 }
 
 // addition and subtruction of accounts
-function addition(account, amount) {
+function addition(obj) {
 
     for (let i in accountArray) {
-        if (accountArray[i].name == account) {
+        if (accountArray[i].name == obj.account) {
 
-            accountArray[i].balance += amount;
+            accountArray[i].balance += obj.amount;
+            let incomeBalance = accountArray[i].balance.toFixed(2);
             let accountAmount = document.querySelectorAll('.accountAmount');
             accountAmount.forEach(el => {
                 if (el.getAttribute('id') == accountArray[i].random) {
 
 
-                    el.innerHTML = accountArray[i].balance;
+                    el.innerHTML = incomeBalance;
                 }
 
             });
 
         }
-
-
     }
-
 }
 
 function subtruction(obj) {
@@ -252,27 +258,30 @@ function subtruction(obj) {
                 } else {
 
                     accountArray[i].balance -= obj.amount;
+                    let expenseFinal = accountArray[i].balance.toFixed(2);
                     let accountAmount = document.querySelectorAll('.accountAmount');
-                    accountAmount.forEach(el => {
-                        if (el.getAttribute('id') == accountArray[i].random) {
-
-
-                            el.innerHTML = accountArray[i].balance;
-
-                        }
-
-
-                    });
                     const htmlExpenseEntry = `
                     <div class="transaction">
                         <p><span class="type span expense">Expense</span> <span class="category span">Category:
                             ${obj.category}</span> <span class="span account">${obj.account}</span> 
-                            <span class="span amount">Amount:<span class="euro">€-</span><span class="expenseamountValue">${obj.amount}</span>
+                            <span class="span amount">Amount:<span class="euro">€-</span>
+                            <span class="expenseamountValue">${obj.amount}</span>
                         </p>
                     </div>
                 
                     `;
                     transactionEntries.insertAdjacentHTML("afterbegin", htmlExpenseEntry);
+                    accountAmount.forEach(el => {
+                        if (el.getAttribute('id') == accountArray[i].random) {
+
+
+                            el.innerHTML = expenseFinal;
+
+                        }
+
+
+                    });
+
                 }
 
 
