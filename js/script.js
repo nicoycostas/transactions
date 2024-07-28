@@ -160,7 +160,7 @@ function addIncome() {
             <div class="transaction" >
                 <p>
                     <span class="type span income">Income</span> 
-                    <span class="category span">Category:${newIncomeEntry.category}</span>
+                    <span class="category span">Category: ${newIncomeEntry.category}</span>
                    
                     <span class="span account">${newIncomeEntry.account}</span>  
                     <span class="span amount">Amount: <span class="euro">€+<span><span class="incomeamountValue">${newIncomeEntry.amount.toFixed(2)}</span>
@@ -187,21 +187,11 @@ function addIncome() {
 function addExpense() {
     let newExpenseEntry = new ExpenseTransaction(categoryofexpenseField.value, accountchooseExpenseField.value, Number(expenseamountField.value).toFixed(2));
     expenseArray.push(newExpenseEntry);
-
-
-
-
-    // subtruction(accountchooseExpenseField.value, Number(expenseamountField.value));
-
     subtruction(newExpenseEntry);
-
-
     modalExpense.style.display = "none";
     calculateTotalofAccounts(accountArray);
     total = calculateTotalofAccounts(accountArray);
     totalAmount.innerHTML = total;
-
-
 }
 
 
@@ -264,8 +254,7 @@ function subtruction(obj) {
                     <div class="transaction">
                         <p><span class="type span expense">Expense</span> <span class="category span">Category:
                             ${obj.category}</span> <span class="span account">${obj.account}</span> 
-                            <span class="span amount">Amount:<span class="euro">€-</span>
-                            <span class="expenseamountValue">${obj.amount}</span>
+                            <span class="span amount">Amount: <span class="euro">€-</span><span class="expenseamountValue">${obj.amount}</span>
                         </p>
                     </div>
                 

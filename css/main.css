@@ -18,6 +18,8 @@ html {
 body {
     background: linear-gradient(to top, rgba(54, 96, 96, 0.483), rgb(66, 79, 74)),
         url(../imgs/background2.jpg);
+    background: linear-gradient(to top, rgba(3, 10, 10, 0.709), rgba(102, 102, 102, 0.293)),
+        url(../imgs/background2.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
@@ -121,12 +123,11 @@ header h1 {
 
 .modalAccount {
     padding: 20px;
-    border: 1px solid rgba(35, 244, 136, 0.165);
+    border: 1px solid rgba(254, 255, 254, 0.165);
     margin-top: 20px;
     display: none;
-    background-color: rgba(81, 81, 81, 0.561);
     border-radius: 20px;
-    background-color: rgba(70, 84, 75, 0.485);
+    background-color: rgba(43, 46, 46, 0.485);
 
 }
 
@@ -155,8 +156,8 @@ input[type=button] {
     /* border: 1px solid black; */
     padding: 50px;
     border-radius: 20px;
-    background-color: rgba(70, 84, 75, 0.485);
-    border: 1px solid rgba(35, 244, 136, 0.165);
+    border: 1px solid rgba(255, 255, 255, 0.165);
+    background-color: rgba(43, 46, 46, 0.485);
 
 }
 
@@ -177,24 +178,15 @@ input[type=button] {
 }
 
 .transaction {
-    /* background-color: rgb(71, 138, 255); */
-    /* color: white; */
+
     width: 100%;
-    /* text-align: center; */
-    /* padding: 5px; */
-    /* margin: 10px; */
-    /* background-color: black; */
-    /* color: white; */
-    /* padding: 5px; */
     border: 1px solid black;
     border-radius: 20px;
     margin: 10px 0;
-    background-color: rgba(45, 45, 45, 0.433);
     box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75);
     -webkit-box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 8px 14px 48px -5px rgba(0, 0, 0, 0.75);
-
-    background-color: rgba(70, 84, 75, 0.587);
+    background-color: rgba(35, 36, 35, 0.587);
 }
 
 
@@ -221,6 +213,7 @@ input[type=button] {
 .btn {
     padding: 10px;
     background-color: rgb(9, 109, 97);
+    background-color: rgb(52, 106, 139);
     color: white;
     border-radius: 8.5px;
 }
@@ -287,7 +280,7 @@ input[type=button] {
 .modalExpense {
     position: absolute;
     top: 40%;
-    background-color: rgba(66, 81, 71, 0.728);
+    background-color: rgba(38, 38, 38, 0.728);
     padding: 40px;
     left: 40%;
     display: none;
