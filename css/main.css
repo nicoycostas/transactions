@@ -16,10 +16,10 @@ html {
 }
 
 body {
-    background: linear-gradient(to top, rgba(54, 96, 96, 0.483), rgb(66, 79, 74)),
-        url(../imgs/background2.jpg);
+    /* background: linear-gradient(to top, rgba(54, 96, 96, 0.483), rgb(66, 79, 74)),
+        url(../imgs/background2.jpg); */
     background: linear-gradient(to top, rgba(3, 10, 10, 0.709), rgba(102, 102, 102, 0.293)),
-        url(../imgs/background2.jpg);
+        url(../imgs/background3.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
@@ -30,7 +30,7 @@ body {
     border-radius: 20px;
 
 
-    width: 90%;
+    width: 95%;
     margin: 0 auto;
 
     padding: 0;
@@ -146,6 +146,26 @@ input[type=button] {
     display: none;
 }
 
+/* .existingAccounts {
+    background-color: rgba(33, 31, 31, 0.849);
+    padding: 20px;
+} */
+
+
+.existingAccounts p {
+
+    padding-bottom: 10px;
+    margin-top: 15px;
+    background-color: rgba(0, 0, 0, 0.309);
+    border-radius: 20px;
+    padding: 20px;
+
+}
+
+.existingAccounts p:hover {
+    background-color: rgba(41, 151, 122, 0.457);
+}
+
 .accountEntry {
     color: rgb(253, 255, 253);
 }
@@ -213,10 +233,18 @@ input[type=button] {
 .btn {
     padding: 10px;
     background-color: rgb(9, 109, 97);
-    background-color: rgb(52, 106, 139);
+    /* background-color: rgb(52, 106, 139); */
     color: white;
     border-radius: 8.5px;
 }
+
+.btn:hover {
+    background-color: white;
+    background-color: rgb(10, 127, 114);
+
+}
+
+
 
 .addTransactionBtn {
     margin-top: 20px;
@@ -275,9 +303,29 @@ input[type=button] {
     color: white;
 }
 
+/*start move transaction */
+.move {
+    background-color: rgb(94, 70, 116);
+    color: white;
+}
+
+.movedfromaccount {
+    background-color: rgb(178, 94, 94);
+}
+
+.movedtoaccount {
+
+    background-color: rgb(0, 166, 255);
+}
+
+/*end move transaction */
+
+
+
 /* modal modalTransaction */
 .modalIncome,
-.modalExpense {
+.modalExpense,
+.modalmoveAccount {
     position: absolute;
     top: 40%;
     background-color: rgba(38, 38, 38, 0.728);
@@ -299,6 +347,12 @@ select {
 }
 
 
+
+
+
+.modalmoveAccount {
+    display: none;
+}
 
 /* existing account */
 .accountAmount,

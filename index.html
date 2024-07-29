@@ -80,6 +80,8 @@
                 <div class="transactionBtns">
                     <button onclick="ModalIncomeOpen();" class="addTransactionBtn btn">Add Income</button>
                     <button onclick="ModalExpenseOpen();" class="addTransactionBtn btn">Add Expense</button>
+                    <button onclick="ModalMoveOpen();" class="moveAccount btn">Move to Another
+                        account</button>
                 </div>
             </div>
         </div>
@@ -155,6 +157,45 @@
             <!-- btns -->
             <div>
                 <button class="btn" onclick="addExpense();">Add Transaction</button>
+                <button class="btn closeModal">Close</button>
+            </div>
+
+        </div>
+
+        <div class="modalmoveAccount">
+
+            <!-- choose to move from  -->
+            <div>
+                <label for="accounttomovefrom">Account to Move from</label><br><br>
+
+                <select class="moveFrom accountsMove" id="accounttomovefrom">
+
+
+
+                </select><br><br>
+            </div>
+
+            <!-- account to move to -->
+            <div>
+                <label for="accounttomoveto">Account to Move to</label><br><br>
+
+                <select class="moveTo accountsMove" id="accounttomovefrom">
+
+
+
+                </select><br><br>
+            </div>
+
+            <!-- move money amount -->
+            <div>
+                <label for="moveamount">Amount</label> <br><br>
+
+                <input class="moveAmount" type="number" name="moveamount" id="moveamount"><br><br>
+            </div>
+
+            <!-- btns -->
+            <div>
+                <button class="btn" onclick="moveMoney();">Add Transaction</button>
                 <button class="btn closeModal">Close</button>
             </div>
 

@@ -6,6 +6,7 @@
 // grab modals divs html
 const modalIncome = document.querySelector('.modalIncome');
 const modalExpense = document.querySelector('.modalExpense');
+const modalMove = document.querySelector('.modalmoveAccount');
 
 // grab account Modal html
 const accountNameField = document.querySelector('.accountNameField');
@@ -17,6 +18,12 @@ const modalAccount = document.querySelector('.modalAccount');
 const categoryofincomeField = document.querySelector('.categoryofincomeField');
 const accountincomeChooseField = document.querySelector('.accountincomeChooseField')
 const incomeamountField = document.querySelector('.incomeamountField');
+
+// grab move money modal html
+const moveFrom = document.querySelector('.moveFrom');
+const moveTo = document.querySelector('.moveTo');
+const accountsMove = document.querySelectorAll('.accountsMove');
+const moveAmount = document.querySelector('.moveAmount');
 
 let total = 0;
 const existingAccounts = document.querySelector('.existingAccounts');
@@ -80,6 +87,14 @@ class ExpenseTransaction {
         this.amount = amount;
     }
 }
+
+class MoneyMove {
+    constructor(movefromAccount, movetoAccount, amount) {
+        this.movefromAccount = movefromAccount;
+        this.movetoAccount = movetoAccount;
+        this.amount = amount;
+    }
+}
 //-----------End Declaration of Objects--------------------//
 
 
@@ -105,6 +120,15 @@ function ModalExpenseOpen() {
     modalExpense.style.display = "block";
     dynAccounts(accountchooseExpenseField);
     closeModal(modalExpense);
+}
+
+// open modal move
+function ModalMoveOpen() {
+    modalMove.style.display = "block";
+    accountsMove.forEach(accountMove => {
+        dynAccounts(accountMove);
+    });
+    closeModal(modalMove);
 }
 //-----------End Open Modals--------------------//
 
@@ -194,6 +218,44 @@ function addExpense() {
     totalAmount.innerHTML = total;
 }
 
+// Move Money Function
+function moveMoney() {
+    let newmoveTransaction = new MoneyMove(moveFrom.value, moveTo.value, Number(moveAmount.value));
+    modalMove.style.display = "none";
+
+    if (newmoveTransaction.movefromAccount == newmoveTransaction.movetoAccount) {
+        const htmlIncomeEntry = `
+        <div class="invalid-transaction" >
+            <p>
+                Can't move money into the same account
+            </p>
+        </div>
+
+        `;
+
+        transactionEntries.insertAdjacentHTML("afterbegin", htmlIncomeEntry);
+    } else if (newmoveTransaction.movefromAccount !== newmoveTransaction.movetoAccount) {
+        const htmlIncomeEntry = `
+            <div class="transaction" >
+                <p>
+                    <span class="type span move">Move</span> 
+                                 
+                    <span class="span movedfromaccount">From ${newmoveTransaction.movefromAccount}<span class="minusaccount"> €-${newmoveTransaction.amount}</span></span>  
+                    <span class="span movedtoaccount">To ${newmoveTransaction.movetoAccount}<span class="plusaccount"> €+${newmoveTransaction.amount}</span></span>  
+                    </span>
+                </p>
+            </div>
+
+            `;
+
+        transactionEntries.insertAdjacentHTML("afterbegin", htmlIncomeEntry);
+        move(newmoveTransaction);
+        calculateTotalofAccounts(accountArray);
+        total = calculateTotalofAccounts(accountArray);
+        totalAmount.innerHTML = total;
+    }
+}
+
 
 function calculateTotalofAccounts(arrayofAccounts) {
     let totalAccount = 0;
@@ -229,6 +291,7 @@ function addition(obj) {
     }
 }
 
+
 function subtruction(obj) {
 
     for (let i in accountArray) {
@@ -239,11 +302,11 @@ function subtruction(obj) {
                 if (obj.amount > accountArray[i].balance) {
 
                     const htmlExpenseEntry = `
-                    <div class="invalid-transaction">
-                        <p>Transaction Invalid. Not enough money in ${obj.account} account.</p>
-                    </div>
-                    
-                    `;
+            <div class="invalid-transaction">
+                <p>Transaction Invalid. Not enough money in ${obj.account} account.</p>
+            </div>
+
+            `;
                     transactionEntries.insertAdjacentHTML("afterbegin", htmlExpenseEntry);
                 } else {
 
@@ -251,14 +314,14 @@ function subtruction(obj) {
                     let expenseFinal = accountArray[i].balance.toFixed(2);
                     let accountAmount = document.querySelectorAll('.accountAmount');
                     const htmlExpenseEntry = `
-                    <div class="transaction">
-                        <p><span class="type span expense">Expense</span> <span class="category span">Category:
-                            ${obj.category}</span> <span class="span account">${obj.account}</span> 
-                            <span class="span amount">Amount: <span class="euro">€-</span><span class="expenseamountValue">${obj.amount}</span>
-                        </p>
-                    </div>
-                
-                    `;
+            <div class="transaction">
+                <p><span class="type span expense">Expense</span> <span class="category span">Category:
+                    ${obj.category}</span> <span class="span account">${obj.account}</span>
+                    <span class="span amount">Amount: <span class="euro">€-</span><span class="expenseamountValue">${obj.amount}</span>
+                </p>
+            </div>
+
+            `;
                     transactionEntries.insertAdjacentHTML("afterbegin", htmlExpenseEntry);
                     accountAmount.forEach(el => {
                         if (el.getAttribute('id') == accountArray[i].random) {
@@ -280,14 +343,67 @@ function subtruction(obj) {
 
             } else {
                 const htmlExpenseEntry = `
-                <div class="invalid-transaction">
-                    <p>Transaction Invalid. ${obj.account} account is empty.</p>
-                </div>
-                
-                `;
+            <div class="invalid-transaction">
+                <p>Transaction Invalid. ${obj.account} account is empty.</p>
+            </div>
+
+            `;
                 transactionEntries.insertAdjacentHTML("afterbegin", htmlExpenseEntry);
 
             }
+        }
+
+
+    }
+}
+
+// function to move money from one account to another
+function move(obj) {
+    for (let i in accountArray) {
+
+        // CHECK IF THE ACCOUNT ARRAY MATCHES THE ACCOUNT WHICH MONEY ARE GOING TO BE SUBTRACK
+        if (accountArray[i].name == obj.movefromAccount) {
+
+
+            // console.log(accountArray[i]);
+            accountArray[i].balance -= obj.amount;
+            let accountAmount = document.querySelectorAll('.accountAmount');
+            let subtracted_amount_balance = accountArray[i].balance.toFixed(2);
+
+            accountAmount.forEach(el => {
+                if (el.getAttribute('id') == accountArray[i].random) {
+
+
+                    el.innerHTML = subtracted_amount_balance;
+                }
+
+            });
+
+
+
+        }
+
+
+        // if (obj.movefromAccount !== obj.movetoAccount){
+        if (accountArray[i].name == obj.movetoAccount) {
+
+
+            // console.log(accountArray[i]);
+            accountArray[i].balance += obj.amount;
+            let accountAmount = document.querySelectorAll('.accountAmount');
+            let added_amount_balance = accountArray[i].balance.toFixed(2);
+
+            accountAmount.forEach(el => {
+                if (el.getAttribute('id') == accountArray[i].random) {
+
+
+                    el.innerHTML = added_amount_balance;
+                }
+
+            });
+
+
+
         }
 
 
