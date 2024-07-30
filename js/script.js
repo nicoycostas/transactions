@@ -141,7 +141,7 @@ function ModalMoveOpen() {
 //----------DATA ENTRY AND CALCULATION-------------//
 // Add account function 
 function addAccount() {
-    let randomnum = Math.floor(Math.random() * 10);
+    let randomnum = Math.floor(Math.random() * 100000000);
     let newAccount = new Account(randomnum, accountNameField.value, typeOptionField.value, Number(balanceField.value));
     accountArray.push(newAccount);
     if (accountArray.length >= 2) moveAccount.disabled = false;
@@ -313,11 +313,11 @@ function subtruction(obj) {
                 if (obj.amount > accountArray[i].balance) {
 
                     const htmlExpenseEntry = `
-            <div class="invalid-transaction">
-                <p>Transaction Invalid. Not enough money in ${obj.account} account.</p>
-            </div>
+                    <div class="invalid-transaction">
+                        <p>Transaction Invalid. Not enough money in ${obj.account} account.</p>
+                    </div>
 
-            `;
+                    `;
                     transactionEntries.insertAdjacentHTML("afterbegin", htmlExpenseEntry);
                 } else {
 
@@ -325,20 +325,29 @@ function subtruction(obj) {
                     let expenseFinal = accountArray[i].balance.toFixed(2);
                     let accountAmount = document.querySelectorAll('.accountAmount');
                     const htmlExpenseEntry = `
-            <div class="transaction">
-                <p><span class="type span expense">Expense</span> <span class="category span">Category:
-                    ${obj.category}</span> <span class="span account">${obj.account}</span>
-                    <span class="span amount">Amount: <span class="euro">€-</span><span class="expenseamountValue">${obj.amount}</span>
-                </p>
-            </div>
+                        <div class="transaction">
+                            <p><span class="type span expense">Expense</span> <span class="category span">Category:
+                                ${obj.category}</span> <span class="span account">${obj.account}</span>
+                                <span class="span amount">Amount: <span class="euro">€-</span><span class="expenseamountValue">${obj.amount}</span>
+                            </p>
+                        </div>
 
-            `;
+                        `;
                     transactionEntries.insertAdjacentHTML("afterbegin", htmlExpenseEntry);
                     accountAmount.forEach(el => {
                         if (el.getAttribute('id') == accountArray[i].random) {
+                            let accountAmount = document.querySelectorAll('.accountAmount');
+                            accountAmount.forEach(sameid => {
+                                if (el.getAttribute('id') == sameid.getAttribute('id')) {
+                                    // console.log(`ID el ${el.getAttribute('id')} and ${sameid.getAttribute('id')} are equal`);
+                                    let newrandomNumber = Math.floor(Math.random() * 100000000);
+                                    accountArray[i].random = newrandomNumber;
+                                    el.setAttribute("id", newrandomNumber.toString())
 
+                                    el.innerHTML = expenseFinal;
+                                }
+                            });
 
-                            el.innerHTML = expenseFinal;
 
                         }
 
