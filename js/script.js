@@ -21,14 +21,16 @@ const incomeamountField = document.querySelector('.incomeamountField');
 
 // grab move money modal html
 const moveFrom = document.querySelector('.moveFrom');
-const moveTo = document.querySelector('.moveTo');
+const movetoAccount = document.querySelector('.moveTo');
 const accountsMove = document.querySelectorAll('.accountsMove');
 const moveAmount = document.querySelector('.moveAmount');
 
+// btn for opening modal move accounts
+const moveAccount = document.querySelector('.moveAccount');
+moveAccount.disabled = true;
 let total = 0;
 const existingAccounts = document.querySelector('.existingAccounts');
 const existingAccountHeading = document.querySelector('.existingAccountHeading');
-
 
 // grab expense modal html
 const categoryofexpenseField = document.querySelector('.categoryofexpenseField');
@@ -60,6 +62,8 @@ const totalAmount = document.querySelector('.totalAmount');
 // copyright year
 const dynYear = document.querySelector('.dynYear');
 
+
+// 
 
 //-----------Declaration of Objects--------------------//
 class Account {
@@ -140,6 +144,7 @@ function addAccount() {
     let randomnum = Math.floor(Math.random() * 10);
     let newAccount = new Account(randomnum, accountNameField.value, typeOptionField.value, Number(balanceField.value));
     accountArray.push(newAccount);
+    if (accountArray.length >= 2) moveAccount.disabled = false;
     modalAccount.style.display = "none";
 
 
@@ -220,14 +225,14 @@ function addExpense() {
 
 // Move Money Function
 function moveMoney() {
-    let newmoveTransaction = new MoneyMove(moveFrom.value, moveTo.value, Number(moveAmount.value));
+    let newmoveTransaction = new MoneyMove(moveFrom.value, movetoAccount.value, Number(moveAmount.value));
     modalMove.style.display = "none";
 
     if (newmoveTransaction.movefromAccount == newmoveTransaction.movetoAccount) {
         const htmlIncomeEntry = `
         <div class="invalid-transaction" >
             <p>
-                Can't move money into the same account
+               Invalid Transaction. Can't move money into the same account
             </p>
         </div>
 
@@ -235,7 +240,10 @@ function moveMoney() {
 
         transactionEntries.insertAdjacentHTML("afterbegin", htmlIncomeEntry);
     } else if (newmoveTransaction.movefromAccount !== newmoveTransaction.movetoAccount) {
-        const htmlIncomeEntry = `
+
+        const conditionalMove = move(newmoveTransaction, moveFrom.value, movetoAccount.value);
+        if (conditionalMove == true) {
+            const htmlIncomeEntry = `
             <div class="transaction" >
                 <p>
                     <span class="type span move">Move</span> 
@@ -248,12 +256,15 @@ function moveMoney() {
 
             `;
 
-        transactionEntries.insertAdjacentHTML("afterbegin", htmlIncomeEntry);
-        move(newmoveTransaction);
+            transactionEntries.insertAdjacentHTML("afterbegin", htmlIncomeEntry);
+        }
         calculateTotalofAccounts(accountArray);
         total = calculateTotalofAccounts(accountArray);
         totalAmount.innerHTML = total;
     }
+    // else{
+
+    // }
 }
 
 
@@ -358,61 +369,85 @@ function subtruction(obj) {
 }
 
 // function to move money from one account to another
-function move(obj) {
+function move(obj, valeuofmoveFrom, valeuofmoveTo) {
     for (let i in accountArray) {
 
         // CHECK IF THE ACCOUNT ARRAY MATCHES THE ACCOUNT WHICH MONEY ARE GOING TO BE SUBTRACK
-        if (accountArray[i].name == obj.movefromAccount) {
+        if (accountArray[i].name == valeuofmoveFrom) {
 
 
-            // console.log(accountArray[i]);
-            accountArray[i].balance -= obj.amount;
-            let accountAmount = document.querySelectorAll('.accountAmount');
-            let subtracted_amount_balance = accountArray[i].balance.toFixed(2);
+            if (accountArray[i].balance == 0) {
+                const htmlIncomeEntry = `
+                <div class="invalid-transaction" >
+                    <p>
+                       Invalid Transaction. ${obj.movefromAccount} account is empty
+                    </p>
+                </div>
+    
+                `;
 
-            accountAmount.forEach(el => {
-                if (el.getAttribute('id') == accountArray[i].random) {
+                transactionEntries.insertAdjacentHTML("afterbegin", htmlIncomeEntry);
+
+                return false;
+            } else if (accountArray[i].balance < obj.amount) {
+                const htmlIncomeEntry = `
+                <div class="invalid-transaction" >
+                    <p>
+                       Invalid Transaction. You don't have enough money in ${accountArray[i].name} account 
+                    </p>
+                </div>
+    
+                `;
+
+                transactionEntries.insertAdjacentHTML("afterbegin", htmlIncomeEntry);
+
+                return false;
+            } else {
 
 
-                    el.innerHTML = subtracted_amount_balance;
+
+                accountArray[i].balance -= obj.amount;
+                let accountAmount = document.querySelectorAll('.accountAmount');
+                let subtracted_amount_balance = accountArray[i].balance.toFixed(2);
+
+
+
+                accountAmount.forEach(el => {
+                    if (el.getAttribute('id') == accountArray[i].random) {
+
+
+
+                        el.innerHTML = subtracted_amount_balance;
+                    }
+
+                });
+
+                for (let x in accountArray) {
+                    if (accountArray[x].name == valeuofmoveTo) {
+                        // console.log(accountArray[x].name);
+                        accountArray[x].balance += obj.amount;
+                        let accountAmount = document.querySelectorAll('.accountAmount');
+                        let added_amount_balance = accountArray[x].balance.toFixed(2);
+
+                        accountAmount.forEach(el => {
+                            if (el.getAttribute('id') == accountArray[x].random) {
+
+
+                                el.innerHTML = added_amount_balance;
+                            }
+
+                        });
+                    }
                 }
 
-            });
 
 
 
+                return true;
+            }
         }
-
-
-        // if (obj.movefromAccount !== obj.movetoAccount){
-        if (accountArray[i].name == obj.movetoAccount) {
-
-
-            // console.log(accountArray[i]);
-            accountArray[i].balance += obj.amount;
-            let accountAmount = document.querySelectorAll('.accountAmount');
-            let added_amount_balance = accountArray[i].balance.toFixed(2);
-
-            accountAmount.forEach(el => {
-                if (el.getAttribute('id') == accountArray[i].random) {
-
-
-                    el.innerHTML = added_amount_balance;
-                }
-
-            });
-
-
-
-        }
-
-
     }
 }
-
-// function minusZero(){
-
-// }
 
 //----------DATA ENTRY AND CALCULATION-------------//
 

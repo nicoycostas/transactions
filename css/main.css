@@ -19,11 +19,25 @@ body {
     /* background: linear-gradient(to top, rgba(54, 96, 96, 0.483), rgb(66, 79, 74)),
         url(../imgs/background2.jpg); */
     background: linear-gradient(to top, rgba(3, 10, 10, 0.709), rgba(102, 102, 102, 0.293)),
-        url(../imgs/background3.jpg);
+        url(../imgs/background3.webp);
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
 }
+
+header {
+    /* background-color: rgb(41, 39, 39); */
+    margin: 0;
+    padding: 0;
+
+    width: 85%;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+
+}
+
+
 
 .app {
 
@@ -35,8 +49,8 @@ body {
 
     padding: 0;
     /* margin-top: 50px; */
-    position: relative;
-    bottom: 60px;
+    /* position: relative;
+    bottom: 60px; */
 }
 
 /* font class*/
@@ -60,17 +74,7 @@ body {
 }
 
 
-header {
-    /* background-color: rgb(41, 39, 39); */
-    margin: 0;
-    padding: 0;
 
-    width: 85%;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-
-}
 
 .logo {
     width: 200px;
@@ -100,25 +104,28 @@ header h1 {
     text-align: right;
     color: white;
     position: relative;
-    top: 90px;
-    right: 389px;
-    color: green;
     color: white;
+    bottom: 50px;
+    right: 200px;
 }
 
 .workspace {
     display: flex;
     color: white;
     border-radius: 20px;
-
-
+    justify-content: center;
 }
 
 .left-sidebar {
-    width: 15%;
-    /* background-color: red; */
-    /* border: 1px solid black; */
+    background-color: rgba(43, 46, 46, 0.662);
+    width: 20%;
+    border-radius: 20px;
+    margin: 0 20px;
+
     padding: 30px;
+    -webkit-box-shadow: 10px 10px 56px -6px rgba(0, 0, 0, 0.84);
+    -moz-box-shadow: 10px 10px 56px -6px rgba(0, 0, 0, 0.84);
+    box-shadow: 10px 10px 56px -6px rgba(0, 0, 0, 0.84);
 }
 
 .modalAccount {
@@ -159,11 +166,12 @@ input[type=button] {
     background-color: rgba(0, 0, 0, 0.309);
     border-radius: 20px;
     padding: 20px;
+    /* border: 1px solid white; */
 
 }
 
 .existingAccounts p:hover {
-    background-color: rgba(41, 151, 122, 0.457);
+    background-color: rgba(49, 188, 151, 0.457);
 }
 
 .accountEntry {
@@ -177,7 +185,10 @@ input[type=button] {
     padding: 50px;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.165);
-    background-color: rgba(43, 46, 46, 0.485);
+    background-color: rgba(43, 46, 46, 0.662);
+    -webkit-box-shadow: 10px 10px 56px -6px rgba(0, 0, 0, 0.84);
+    -moz-box-shadow: 10px 10px 56px -6px rgba(0, 0, 0, 0.84);
+    box-shadow: 10px 10px 56px -6px rgba(0, 0, 0, 0.84);
 
 }
 
@@ -232,15 +243,21 @@ input[type=button] {
 
 .btn {
     padding: 10px;
-    background-color: rgb(9, 109, 97);
-    /* background-color: rgb(52, 106, 139); */
+
+
     color: white;
+    background-color: white;
+
+    color: rgb(14, 111, 109);
     border-radius: 8.5px;
+    transition: all 0.3s;
 }
 
 .btn:hover {
     background-color: white;
-    background-color: rgb(10, 127, 114);
+    background-color: rgb(14, 150, 148);
+
+    color: white;
 
 }
 
